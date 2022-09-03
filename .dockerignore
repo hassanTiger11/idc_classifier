@@ -1,0 +1,5 @@
+.*
+*.jpg
+__pycache__
+*.zip
+temp_files/*
