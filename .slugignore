@@ -3,3 +3,8 @@
 __pycache__
 *.zip
 temp_files/*
+.github
+.gitignore
+.dockerignore
+*.bat
+*.md
