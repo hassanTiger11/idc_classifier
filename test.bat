@@ -14,3 +14,9 @@
 :: Upload the funding curve data
 ::
 curl --request POST --url http://127.0.0.1:5000/predict -F file=@".\pic.jpg"
+
+
+::
+:: deploy to heroku
+::
+git push heroku HEAD:master
