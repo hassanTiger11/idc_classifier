@@ -9,7 +9,7 @@ RUN apt-get install -y python3-pip
 COPY . .
 RUN pip install -r requirements.txt 
 
-
+RUN cd app
 
 EXPOSE 5000
 
