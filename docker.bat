@@ -9,6 +9,7 @@ docker tag 05ff620868d1 hassantiger11/idc_identifier:latest
 docker push hassantiger11/idc_classifier:latest
 
 ::
-:: for aws port is 8080
+:: gets task definition as created in website
 ::
 
+ aws ecs describe-task-definition --task-definition my-task-definition-family --query taskDefinition > task-definition.json
