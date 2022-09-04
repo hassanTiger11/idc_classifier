@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
 
 RUN chgrp -R 0 /app \
     && chmod -R g=u /app \
-    && cd app && python3 -m virtualenv .venv && source .venv/bin/activate \
+    && cd app && python3 -m venv .venv && ls -r .venv &&source ./.venv/bin/activate \
     && pip install pip --upgrade \
     && pip install -r requirements.txt
 EXPOSE $PORT
