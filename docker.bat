@@ -11,3 +11,4 @@ docker push hassantiger11/idc_classifier:latest
 ::
 :: for aws port is 8080
 ::
+
