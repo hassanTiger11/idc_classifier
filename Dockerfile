@@ -1,20 +1,20 @@
-FROM python:3.8-slim
-ARG port
+# start by pulling the python image
+FROM python:latest
 
-USER root
-COPY . /app
 WORKDIR /app
+# copy the requirements file into the image
+COPY ./requirements.txt /app
+COPY ./app/* /app
 
-ENV PORT=$port
 
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
-    && apt-get -y install curl \
-    && apt-get install libgomp1
 
-RUN chgrp -R 0 /app \
-    && chmod -R g=u /app \
-    && pip install pip --upgrade \
-    && pip install -r requirements.txt
-EXPOSE $PORT
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
 
-CMD cd app && gunicorn app:server --bind 0.0.0.0:$PORT --preload
+# copy every content from the local file to the image
+
+
+# configure the container to run in an executed manner
+ENTRYPOINT [ "python3", "-m" ]
+
+CMD [ "flask","--app", "app", "run", "-p", "5000"]
