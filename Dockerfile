@@ -17,4 +17,4 @@ RUN pip install -r requirements.txt
 # configure the container to run in an executed manner
 ENTRYPOINT [ "python3", "-m" ]
 
-CMD [ "flask","--app", "app", "run", "-p", "5000"]
+CMD [ "flask","--app", "app", "run", "--host=0.0.0.0"]
