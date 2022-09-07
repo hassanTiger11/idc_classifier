@@ -4,7 +4,7 @@ FROM python:latest
 WORKDIR /app
 # copy the requirements file into the image
 COPY ./requirements.txt /app
-COPY ./app/* /app
+COPY ./app/* /app/
 
 
 RUN pip install --upgrade pip
