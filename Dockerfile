@@ -1,10 +1,12 @@
 # start by pulling the python image
 FROM python:latest
 
-WORKDIR /app
+WORKDIR /api
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
 # copy the requirements file into the image
-COPY ./requirements.txt /app
-COPY ./app/* /app
+COPY ./requirements.txt requirements.txt
+COPY ./api/* .
 
 
 
@@ -15,6 +17,6 @@ RUN pip install -r requirements.txt
 
 
 # configure the container to run in an executed manner
-ENTRYPOINT [ "python3", "-m" ]
+#ENTRYPOINT [ "python3", "-m" ]
 
-CMD [ "flask","--app", "app", "run", "--host=0.0.0.0"]
+CMD [ "flask", "run"]

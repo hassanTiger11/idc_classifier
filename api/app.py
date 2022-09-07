@@ -16,7 +16,9 @@ def hello_world():
     '''
     This request for debugging
     '''
-    return "<p>Invasive Ductal Carcinoma Classifier</p>"
+    return "<p>Invasive Ductal Carcinoma Classifier. Please send POST request with you image to '/predict'.</p>"
+
+
 
 @app.route('/predict', methods=['POST'])
 def analyze_pic():
