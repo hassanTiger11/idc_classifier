@@ -1,11 +1,13 @@
 # start by pulling the python image
 FROM python:latest
 
+# ignores install to root warning
+ENV PIP_ROOT_USER_ACTION=ignore
+
 WORKDIR /app
 # copy the requirements file into the image
 COPY ./requirements.txt /app
 COPY ./app/* /app/
-
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
