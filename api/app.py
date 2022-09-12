@@ -10,6 +10,9 @@ app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['model'] = load_model()
+'''
+Adding HTTPS/SSL
+'''
 
 @app.route("/")
 def hello_world():
@@ -55,3 +58,5 @@ def analyze_pic():
         return 'possibly idc'
         
     
+if __name__ == "__main__":
+    app.run(debug=True, ssl_context=('cert.pem', 'priv_key.pem'))
