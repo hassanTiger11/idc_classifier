@@ -6,21 +6,23 @@ import { useEffect } from 'react';
 import axios from "axios"
 import FormData from 'form-data'
 export default function Predict() {
-  
+  const proxy = axios.create({
+    baseURL:"http://127.0.0.1:5000",
+  });
   const PredictStyle={
       width: "30vw"
-    }
-  const [files, setFiles] = useState(null)
-  const [Err, setErr] = useState("")
+  };
+  const [files, setFiles] = useState(null);
+  const [Err, setErr] = useState("");
   const handleChange = (file) => {
         console.log(file);
         setFiles(file);
-      }
+  };
   const sendFile = ()=>{
     const data = new FormData()
     data.append('file', files)
     const headers ={ "Content-Type": "multipart/form-data" }
-    axios.post('predict',
+    proxy.post('predict',
     data, 
     headers).then((res)=>{
         console.log(JSON.stringify(res))
@@ -29,13 +31,17 @@ export default function Predict() {
         console.error(err)
         
       })
-    }
+  }
+ 
   useEffect(()=>{
       console.log("on mount");
-      axios.get("/").then((res)=>{
+      proxy
+      .get("/", proxy)
+      .then((res)=>{
         console.log(`res: ${JSON.stringify(res)}`)
         setFiles("");
-      }).catch((err)=>{
+      })
+      .catch((err)=>{
         console.log(`catch ${err}`)
       });
     },

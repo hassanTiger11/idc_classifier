@@ -1,12 +1,16 @@
 
+from operator import methodcaller
 import os
 from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from misc import allowed_file, ALLOWED_EXTENSIONS, UPLOAD_FOLDER
 from nn import load_model, predict
 import os
+from flask_cors import CORS
 app = Flask(__name__)
 
+#allow react to access this api
+CORS(app)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['model'] = load_model()
@@ -20,7 +24,6 @@ def hello_world():
     This request for debugging
     '''
     return "<p>Invasive Ductal Carcinoma Classifier. Please send POST request with you image to '/predict'.</p>"
-
 
 
 @app.route('/predict', methods=['POST'])
