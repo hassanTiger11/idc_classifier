@@ -1,10 +1,11 @@
-import logo from './logo.svg';
+
 import './App.css';
 import Predict from './Predict';
 
+
 function App() {
   const PageStyle = {
-    
+    margin:'auto',
     width: "100vw",
     alignItems: 'center',
     justifyContent: 'center',

@@ -22,4 +22,5 @@ RUN pip install -r requirements.txt
 # configure the container to run in an executed manner
 #ENTRYPOINT [ "python3", "-m" ]
 EXPOSE 8000
-CMD ["gunicorn", "--certfile", "cert.pem", "--keyfile", "key.pem", "-b", "0.0.0.0:8000", "app:app"]
+#CMD ["gunicorn", "--certfile", "cert.pem", "--keyfile", "key.pem", "-b", "0.0.0.0:8000", "app:app"]
+CMD ["flask", "run", "--host", "0.0.0.0"]

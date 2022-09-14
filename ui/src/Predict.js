@@ -10,10 +10,10 @@ export default function Predict() {
     baseURL:"http://127.0.0.1:5000",
   });
   const PredictStyle={
-      width: "30vw"
+      width: "50vw",
+      display: 'inline-block',
   };
   const [files, setFiles] = useState(null);
-  const [Err, setErr] = useState("");
   const handleChange = (file) => {
         console.log(`handlechange: ${JSON.stringify(file)}`);
         setFiles(file);
@@ -40,11 +40,33 @@ export default function Predict() {
       })
       
   }
+  const send_str = ()=>{
+    const data = new FormData()
+    data.append('file', 'Hello from ui')
+    
+    proxy.post("test", data, {
+      headers: {
+        'accept': 'application/json',
+        'Accept-Language': 'en-US,en;q=0.8',
+        'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+      }
+    })
+    .then((res)=>{
+        console.log(`predict: success: ${JSON.stringify(res)}`)
+      }).catch((err)=>{
+        
+        console.error(err.response.data)
+        
+    })
+  }
  
   useEffect(()=>{
       console.log("on mount");
-      proxy
-      .get("/", proxy)
+      const api = axios.create({
+        baseURL:"http://127.0.0.1:5000",
+      });
+      api
+      .get("/", api)
       .then((res)=>{
         console.log(`res: ${JSON.stringify(res)}`)
         setFiles("");
@@ -55,14 +77,17 @@ export default function Predict() {
     },
     []
   )
+  
   if(files == null){
     return <>Server is not working!</>
   }
+  
   return (
     <div style={PredictStyle}>
       <DropzoneArea filesLimit={1} acceptedFiles={['image/*']} onChange={(file)=>handleChange(file)}/>
       <Button onClick={()=>sendFile()}>Predict</Button>
-      <p style={{color:"red"}}>{Err}</p>
+      <Button onClick={()=>send_str()}>test api with text</Button>
+      
     </div>
   )
 }
