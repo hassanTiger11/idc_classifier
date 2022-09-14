@@ -36,19 +36,23 @@ def analyze_pic():
     '''
     # check if the post request has the file part
     print("function called analyze_pic, path = /analyze_pic")
+    print(f"request: {request.form.to_dict()}")
+    print(f"request.json: {request.json}")
+    if 'file' not in request.form:
+        #flash('No file part')
+        return "file doesn't exist in the request", 500
 
-    if 'file' not in request.files:
-        flash('No file part')
-        return redirect(request.url)
-
-    file = request.files['file']
+    file = request.form['file']
+    print(f'curr file= {file}')
     # if user does not select file, browser also
     # submit a empty part without filename
     if file.filename == '':
+        print("Predict: Err: Filename is empty")
         flash('No selected file')
         return redirect(request.url)
 
     if file and allowed_file(file.filename):
+        print("Predict: file is  allowed")
         filename = secure_filename(file.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
@@ -59,6 +63,8 @@ def analyze_pic():
         if(result == 0):
             return 'healthy tissue'
         return 'possibly idc'
+    print("Err: file not allowed")
+    return "File not allowed"
         
     
 if __name__ == "__main__":
